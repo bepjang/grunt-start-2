@@ -87,9 +87,11 @@ module.exports = function (grunt) {
         // css 를 압축합니다.
         cssmin: {
             options: {
-                compatibility: 'ie8',
+                // noAdvanced: true
+                compatibility: 'ie9',
                 keepSpecialComments: '*',
-                noAdvanced: true
+                sourceMap: true,
+                advanced: false
             },
             dist: {
                 files: [{
@@ -119,7 +121,8 @@ module.exports = function (grunt) {
 
         concat: {
             options: {
-                separator: ';',
+                // separator: ';',
+                stripBanners: false,
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                 '<%= grunt.template.today("yyyy-mm-dd") %> */'
             },
