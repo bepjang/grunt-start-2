@@ -36,6 +36,7 @@ module.exports = function (grunt) {
             ]
         },
 
+        // CSS를 만듭니다.
         sass: {
             options: {
                 sourceComments: false,
@@ -50,6 +51,8 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
+
+        // 벤더프리픽스를 추가합니다.
         postcss: {
             options: {
                 processors: [
@@ -84,6 +87,7 @@ module.exports = function (grunt) {
                 dest: 'dest/css/'
             }
         },
+
         // css 를 압축합니다.
         cssmin: {
             options: {
@@ -119,6 +123,7 @@ module.exports = function (grunt) {
             }
         },
 
+        // 파일을 합칩니다.
         concat: {
             options: {
                 // separator: ';',
@@ -132,6 +137,7 @@ module.exports = function (grunt) {
             }
         },
 
+        // 압축합니다.
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -143,16 +149,7 @@ module.exports = function (grunt) {
             }
         },
 
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/images/',
-                    src: '**/*.{png,jpeg,jpg,gif}',
-                    dest: 'dest/images/'
-                }]
-            }
-        },
+        // 폴더 및 파일을 삭제합니다.
         clean: {
             dist: {
                 files: [{
@@ -164,6 +161,8 @@ module.exports = function (grunt) {
                 }]
             },
         },
+
+        // 폴더 및 파일을 복사합니다.
         copy: {
             dist: {
                 files: [ 
@@ -178,6 +177,19 @@ module.exports = function (grunt) {
             }
         },
 
+        // 이미지를 최적화 합니다.
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/images/',
+                    src: '**/*.{png,jpeg,jpg,gif}',
+                    dest: 'dest/images/'
+                }]
+            }
+        },
+
+        // 병렬로 작업을 실행합니다.
         concurrent: {
             options: {
                 logConcurrentOutput: true
@@ -188,6 +200,7 @@ module.exports = function (grunt) {
             ]
         },
 
+        // 감시를 합니다.
         watch: {
             options: { livereload: true },
             gruntfile: {
@@ -215,6 +228,8 @@ module.exports = function (grunt) {
             //     tasks: ['newer:copy'],
             // }
         },
+
+        // 서버를 열어서 브라우져에서 확인합니다.
         connect: {
             server: {
                 options: {
