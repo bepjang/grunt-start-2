@@ -11,7 +11,6 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-
         // html 에서 인클루드를 사용합니다.
         includes: {
             dist: {
