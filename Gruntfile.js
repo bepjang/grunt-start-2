@@ -3,6 +3,7 @@ module.exports = function (grunt) {
     'use strict';
 
     // 작업시간 표시
+    var sass = require('node-sass');
     require('time-grunt')(grunt);
 
     // 자동으로 grunt 태스크를 로드합니다. grunt.loadNpmTasks 를 생략한다.
@@ -38,6 +39,7 @@ module.exports = function (grunt) {
         // CSS를 만듭니다.
         sass: {
             options: {
+                implementation: sass,
                 sourceComments: false,
                 sourceMap: true,
                 outputStyle: 'expanded' // nested, expanded, compact, compressed
@@ -73,7 +75,7 @@ module.exports = function (grunt) {
                 src: 'dest/css/*.css',
             }
         },
-        
+
         // css 의 속성을 정렬해줍니다.
         csscomb: {
             options: {
@@ -128,7 +130,7 @@ module.exports = function (grunt) {
                 // separator: ';',
                 stripBanners: false,
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */'
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */'
             },
             dist: {
                 src: 'src/js/site/*.js',
@@ -140,7 +142,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */'
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */'
             },
             dist: {
                 src: 'dest/js/site.js',
@@ -164,7 +166,7 @@ module.exports = function (grunt) {
         // 폴더 및 파일을 복사합니다.
         copy: {
             dist: {
-                files: [ 
+                files: [
                     // fonts
                     // {
                     //     expand: true,
@@ -208,15 +210,15 @@ module.exports = function (grunt) {
             },
             html: {
                 files: ['src/docs/**/*.html'],
-                tasks: ['includes','htmlhint'],
+                tasks: ['includes', 'htmlhint'],
             },
             sass: {
                 files: ['src/scss/**/*.{sass,scss}'],
-                tasks: ['sass','postcss','csscomb','cssmin'],
+                tasks: ['sass', 'postcss', 'csscomb', 'cssmin'],
             },
             jsnt: {
                 files: ['src/js/**/*.js'],
-                tasks: ['jshint','concat','uglify'],
+                tasks: ['jshint', 'concat', 'uglify'],
             },
             img: {
                 files: ['src/images/**/*.{gif,jpeg,jpg,png}'],
@@ -248,42 +250,42 @@ module.exports = function (grunt) {
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('serve', function (target) {
-      if (target === 'dist') {
-          return grunt.task.run(['connect', 'watch']);
-      }
+        if (target === 'dist') {
+            return grunt.task.run(['connect', 'watch']);
+        }
 
-      grunt.task.run([
-        'default',
-        'connect',
-        'watch'
-      ]);
+        grunt.task.run([
+            'default',
+            'connect',
+            'watch'
+        ]);
 
     });
 
     // html task
     grunt.registerTask('html', [
-            'includes',
-            'htmlhint'
-        ]
+        'includes',
+        'htmlhint'
+    ]
     );
 
     // css task
     grunt.registerTask('css', [
-            // 'clean',
-            'sass',
-            'postcss',
-            // 'csslint',
-            'csscomb',
-            'cssmin'
-        ]
+        // 'clean',
+        'sass',
+        'postcss',
+        // 'csslint',
+        'csscomb',
+        'cssmin'
+    ]
     );
 
     // javascript task
     grunt.registerTask('jsnt', [
-            'jshint',
-            'concat',
-            'uglify'
-        ]
+        'jshint',
+        'concat',
+        'uglify'
+    ]
     );
 
     grunt.registerTask('default', [
